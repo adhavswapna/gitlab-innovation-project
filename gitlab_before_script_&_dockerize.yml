@@ -1,0 +1,29 @@
+before_script:
+ - echo "Installing Flask and other dependencies"
+ - export PYTHONPATH=$PYTHONPATH:/builds/adhavswapna/gitlab_innovation_pitch  # Update the directory to the parent directory of Web-Application-files
+ - export DOCKER_HOST=unix:///var/run/docker.sock
+ - pip install --upgrade pip
+ - pip install Flask
+ - pip install requests
+ - pip install python-dotenv
+ - apt-get update -qy
+ - apt-get install -y docker.io
+ - docker --version
+ - pip install Flask gunicorn
+ - pip install -r Web_Application_files/requirements.txt
+
+test:
+   script: 
+    - cd Web_Application_files
+    - python3 -m unittest discover -v
+
+build:
+  image: docker:20.10.16
+  stage: build
+  services:
+    - docker:20.10.16-dind
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/innovation-pitch-gitlab/image:latest -f Web_Application_files/Dockerfile .
+    - docker push $CI_REGISTRY/innovation-pitch-gitlab/image:latest
+ 

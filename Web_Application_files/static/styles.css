@@ -1,0 +1,105 @@
+/* static/styles.css */
+
+body {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.digital-clock {
+    font-size: 36px;
+    font-family: 'Courier New', monospace;
+    color: #00ff00;
+    text-align: center;
+}
+
+.content-wrapper {
+    padding: 20px;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Set a fixed height for the image container */
+    overflow: hidden; /* Hide overflowing images */
+}
+
+.rainfall-image,
+.container-image,
+.weather-image,
+.container2-image,
+.container3-image,
+.container4-image,
+.container5-image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Set width to cover the entire container */
+    height: 100%; /* Set height to cover the entire container */
+    margin: 10px;
+    opacity: 0;
+    animation: slideshowImage 16s linear infinite; /* Adjust the duration for the entire slideshow */
+}
+
+.rainfall-image {
+    position: absolute;
+    right: 0; /* Position the rainfall image to the right */
+    top: 0; /* Position the rainfall image at the top */
+    width: 100%; /* Set a specific width for the rainfall image */
+    height: 100%; /* Set a specific height for the rainfall image */
+    object-fit: cover; /* Ensure the image covers the entire container */
+    opacity: 0;
+    animation: slideshowImage 16s linear infinite; /* Adjust the duration for the entire slideshow */
+    animation-delay: 8s; /* Delay the start of the animation for the Rainfall image */
+}
+
+.container-image {
+    animation-delay: 5s;
+}
+
+.container2-image {
+    animation-delay: 7s;
+}
+
+.container3-image {
+    animation-delay: 9s;
+}
+
+.container4-image {
+    animation-delay: 11s;
+}
+
+.container5-image {
+    animation-delay: 13s;
+}
+
+.container6-image {
+    animation-delay: 15s;
+}
+
+.weather-image {
+    animation-delay: 17s; /* Delay the start of the animation for the Earth image */
+}
+
+@keyframes slideshowImage {
+    0%, 100% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+    10%, 45% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    50%, 70%, 90% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+    55%, 75%, 95% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

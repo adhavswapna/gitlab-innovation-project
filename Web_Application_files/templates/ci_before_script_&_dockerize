@@ -1,0 +1,24 @@
+
+before_script:
+  - echo "Setting up Docker environment"
+  - export PYTHONPATH=$PYTHONPATH:/builds/adhavswapna/innovation-pitch
+  - export DOCKER_HOST=unix:///var/run/docker.sock
+  - apt-get update -qy
+  - apt-get install -y docker.io
+  - docker --version
+  - pip3 install --upgrade pip
+  - pip3 install Flask requests python-dotenv
+  - pip3 install Flask gunicorn
+  - pip3 install -r Web_Application_files/requirements.txt
+
+dockerize:
+  stage: dockerize
+  script:
+    - source before_script.sh
+    - echo "Creating and pushing Docker image"
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA -f Web_Application_files/Dockerfile .
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  only:
+    - main  # Adjust this based on your branching strategy or triggers
+

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ship Weather App</title>
+    <!-- Add these links in your head section of HTML templates -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ship Weather App</h1>
+    <form action="{{ url_for('fetch_weather') }}" method="post">
+        <label for="latitude">Enter ship's latitude:</label>
+        <input type="text" name="latitude" id="latitude" required>
+
+        <label for="longitude">Enter ship's longitude:</label>
+        <input type="text" name="longitude" id="longitude" required>
+
+        <label for="city_name">Enter city name:</label>
+        <input type="text" name="city_name" id="city_name" required>
+
+        <button type="submit">Fetch Weather</button>
+    </form>
+        <div class="seafarer-text">
+        <p>“Fare wind and Calm Seas” – this is what a seafarer hopes for when he is sailing at high seas. However, nature is bound to show ups and downs, and rough weather may hit a vessel in open sea with no time to react. Even if there is a practice of sending pre weather warning to ships for route change or speed alterations, every seaman has experienced high swell and unfriendly side of the sea.</p>
+    </div>
+</body>
+</html>

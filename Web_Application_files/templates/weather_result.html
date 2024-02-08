@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ship Weather Result</title>
+    <!-- Added CSS links here -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Added custom styles here */
+        .earth-image-container {
+            margin-bottom: 20px; /* Adjust this value as needed */
+        }
+
+        .image-container {
+            position: relative;
+            top: -20px; /* Adjust this value as needed */
+            text-align: center;
+        }
+
+        .container-image, .weather-image, .earth-image, .container2-image, .container3-image, .container4-image, .container5-image, .rainfall-image {
+            display: block;
+            margin: auto;
+            width: 200px; /* Set the desired width */
+            height: 200px; /* Set the desired height */
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <img class="dark-overlay" src="{{ icon_url }}" alt="Weather Icon"> <!-- Display weather information here -->
+        <h2>Ship Weather Result</h2>
+        <p>Temperature: {{ temperature }}°C</p>
+        <p>Condition: {{ condition }}</p>
+        <p>Wind Speed: {{ wind_speed }} m/s</p>
+        <p>Wind Direction: {{ wind_direction }}°</p>
+        <!-- Add more weather details as needed -->
+        <img src="{{ icon_url }}" alt="Weather Icon" class="img-fluid">
+
+        <!-- Digital Clock -->
+        <div id="digital-clock" class="digital-clock"></div>
+    </div>
+
+    <div class="image-container">
+        <img class="earth-image" src="{{ url_for('static', filename='earth.jpeg') }}" alt="Earth Image">
+        <img class="container-image" src="{{ url_for('static', filename='container.jpeg') }}" alt="Container Image">
+        <img class="container2-image" src="{{ url_for('static', filename='container2.jpeg') }}" alt="Container Image">
+        <img class="container3-image" src="{{ url_for('static', filename='container3.jpeg') }}" alt="Container Image">
+        <img class="container4-image" src="{{ url_for('static', filename='container4.jpeg') }}" alt="Container Image">
+        <img class="container5-image" src="{{ url_for('static', filename='container5.jpeg') }}" alt="Container Image">
+        <img class="weather-image" src="{{ url_for('static', filename='weather.png') }}" alt="Weather Image">
+        <img class="rainfall-image" src="{{ url_for('static', filename='rainfall.gif') }}" alt="Rainfall Image">
+    </div>
+
+    <script>
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            // Add leading zero if the value is less than 10
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+            // Display the time
+            document.getElementById("digital-clock").innerHTML = hours + ":" + minutes + ":" + seconds;
+
+            // Update the clock every second
+            setTimeout(updateClock, 1000);
+        }
+
+        // Initial call to update clock
+        updateClock();
+    </script>
+</body>
+</html>
